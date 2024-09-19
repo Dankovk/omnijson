@@ -6,10 +6,14 @@
   "scripts": {
     "build:executable": "bun build src/index.ts --compile  --outfile dist/omnijson",
     "build:module": "bun build src/index.ts --outdir dist --target bun",
-    "build": "bun run build:executable && bun run build:module"
+    "build": "bun run build:executable && bun run build:module",
+    "publish-github": "npm run build && npm publish"
   },
+
+  
   "author": "Dankov Alex <dankov.kiev@gmail.com>",
   "license": "MIT",
+
   "bin": {
     "omnijson": "./dist/omnijson"
   },
