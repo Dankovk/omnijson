@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 
 import { parseUserInput } from './system-wrapper';
 import { spawnSync } from 'child_process';

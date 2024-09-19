@@ -1,4 +1,6 @@
+#!/usr/bin/env bun
 import { Config } from './types';
+
 
 const defaultConfig: Config = {
     ignoreDirs: ['.git', 'node_modules', 'dist', 'public', 'build', 'scripts', 'src/assets', 'src/components/ui/icons'],
