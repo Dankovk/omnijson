@@ -71,6 +71,8 @@ web_modules/
 
 .npm
 
+.npmrc
+
 # Optional eslint cache
 
 .eslintcache

@@ -1,6 +1,6 @@
 {
-  "name": "omnijson",
-  "version": "0.0.6",
+  "name": "ohmyjson",
+  "version": "0.0.7",
   "description": "A simple CLI tool to (un)jsonify files and directories",
   "main": "./dist/omnijson",
   "scripts": {
