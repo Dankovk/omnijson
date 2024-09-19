@@ -2,16 +2,16 @@
   "name": "omnijson",
   "version": "0.0.3",
   "description": "A simple CLI tool to (un)jsonify files and directories",
-  "main": "src/index.ts",
+  "main": "./dist/omnijson",
   "scripts": {
     "build:executable": "bun build src/index.ts --compile  --outfile dist/omnijson",
     "build:module": "bun build src/index.ts --outdir dist --target bun",
     "build": "bun run build:executable && bun run build:module"
   },
-  "author": "Jakub Czapiewski",
+  "author": "Dankov Alex <dankov.kiev@gmail.com>",
   "license": "MIT",
   "bin": {
-    "omnijson": "dist/omnijson"
+    "omnijson": "./dist/omnijson"
   },
   "type": "module",
   "dependencies": {
