@@ -1,8 +1,8 @@
 {
   "name": "ohmyjson",
-  "version": "0.0.7",
+  "version": "0.0.10",
   "description": "A simple CLI tool to (un)jsonify files and directories",
-  "main": "./dist/omnijson",
+  
   "scripts": {
     "build:executable:darwin-arm64": "bun build src/core.ts --compile --target=bun-darwin-arm64 --outfile dist/omnijson-darwin-arm64",
     "build:executable:darwin-x64": "bun build src/core.ts --compile --target=bun-darwin-x64 --outfile dist/omnijson-darwin-x64",
@@ -15,15 +15,12 @@
     "build": "bun run clean && bun run build:executable && bun run build:executable-wrapper",
     "test": "cd dist && bun run index.js"
   },
-
-  
   "author": "Dankov Alex <dankov.kiev@gmail.com>",
   "license": "MIT",
-
   "bin": {
-    "omnijson": "./dist/index.js"
+    "ohmyjson": "./dist/omnijson-darwin-arm64"
   },
-  "exports": "./dist/index.js",
+  "exports": "./dist/omnijson-darwin-arm64",
   "type": "module",
   "dependencies": {
     "@swc/core": "^1.6.4",
