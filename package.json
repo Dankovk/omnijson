@@ -1,8 +1,7 @@
 {
   "name": "ohmyjson",
-  "version": "0.0.10",
+  "version": "0.0.11-js",
   "description": "A simple CLI tool to (un)jsonify files and directories",
-  
   "scripts": {
     "build:executable:darwin-arm64": "bun build src/core.ts --compile --target=bun-darwin-arm64 --outfile dist/omnijson-darwin-arm64",
     "build:executable:darwin-x64": "bun build src/core.ts --compile --target=bun-darwin-x64 --outfile dist/omnijson-darwin-x64",
@@ -12,20 +11,26 @@
     "build:executable": "bun run build:executable:darwin-arm64",
     "build:executable-wrapper": "bun build src/index.ts  --outfile dist/index.js --target bun",
     "clean": "rm -rf dist",
-    "build": "bun run clean && bun run build:executable && bun run build:executable-wrapper",
-    "test": "cd dist && bun run index.js"
+    "build": "bun run clean && bun run build:js && bun run build:worker",
+    "build:js": "bun build src/core.ts --outfile dist/index.js --compile",
+    "build:worker": "bun build src/worker.ts --outfile dist/worker.js --compile",
+    "test": "cd dist && ./index.js"
   },
   "author": "Dankov Alex <dankov.kiev@gmail.com>",
   "license": "MIT",
-  "bin": {
-    "ohmyjson": "./dist/omnijson-darwin-arm64"
+  "exports": {
+    ".": "./dist/index.js",
+    "./worker.ts": "./dist/worker.js"
   },
-  "exports": "./dist/omnijson-darwin-arm64",
+  "bin": {
+    "ohmyjson": "./dist/index.js"
+  },
   "type": "module",
   "dependencies": {
     "@swc/core": "^1.6.4",
     "@swc/wasm": "^1.6.4",
-    "bun": "^1.0.13"
+    "bun": "^1.0.13",
+    "isbinaryfile": "^5.0.2"
   },
   "devDependencies": {
     "@types/bun": "latest"
