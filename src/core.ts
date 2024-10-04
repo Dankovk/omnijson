@@ -3,11 +3,10 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { file as BunFile, write as BunWrite } from 'bun';
-import { parseUserInput } from './system-wrapper';
-import { Config, FileData } from './types';
+import { parseUserInput } from './system-wrapper.ts';
+import { Config, FileData } from './types.ts';
 import { Worker } from 'worker_threads';
 import os from 'os';
-import { isBinarySync } from 'isbinaryfile';
 
 const config: Config = parseUserInput();
 
@@ -53,7 +52,7 @@ async function processFileWithWorker(filePath: string, parentPath: string): Prom
 }
 
 async function walkDir(dirPath: string, json: Record<string, FileData>, parentPath = ''): Promise<void> {
-    if (ignoreDirs.some(dir => [dirPath, parentPath, path.basename(dirPath), path.basename(parentPath)].includes(dir))) {
+    if (ignoreDirs.some((dir: string) => [dirPath, parentPath, path.basename(dirPath), path.basename(parentPath)].includes(dir))) {
         return;
     }
 

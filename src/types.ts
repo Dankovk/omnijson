@@ -8,3 +8,8 @@ export interface Config {
     clearDirAfterTransform: boolean;
     includeBinary: boolean;
 }
+
+export interface FileData {
+    code: string;
+    isBinary: boolean;
+}

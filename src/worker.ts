@@ -99,7 +99,7 @@ async function processFile(filePath: string, parentPath: string, mode: string, i
 }
 
 parentPort?.on('message', async (message: { filePath: string; parentPath: string; mode: string; includeBinary: boolean; fileContent: string }) => {
-    const { filePath, parentPath, mode, includeBinary, fileContent } = message;
-    const result = await processFile(filePath, parentPath, mode, includeBinary, fileContent);
+    const { filePath, parentPath, mode, includeBinary } = message;
+    const result = await processFile(filePath, parentPath, mode, includeBinary);
     parentPort?.postMessage(result);
 });
