@@ -1,8 +1,15 @@
 {
 	"name": "@dankovk/omnijson",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"license": "MIT",
-	"exports": "./src/index.ts",
+	"exports": {
+		".": "./src/index.ts",
+		"./worker.ts": "./src/worker.ts",
+		"./cli.ts": "./cli.ts",
+		"./system-wrapper.ts": "./src/system-wrapper.ts",
+		"./types.ts": "./src/types.ts",
+		"./core.ts": "./src/core.ts"
+	},
 	"bin": {
 		"ohmyjson": "./src/cli.ts",
 		"omnijson": "./src/cli.ts"
