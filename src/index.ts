@@ -1,13 +1,13 @@
 #!/usr/bin/env bun
 
-import { parseUserInput } from './system-wrapper';
-import { spawnSync } from 'child_process';
-import * as path from 'path';
+import { parseUserInput } from './system-wrapper.js';
+import { spawnSync } from 'node:child_process';
+import * as path from 'node:path';
 
 const platform = process.platform;
 const arch = process.arch;
 
-let binaryName;
+let binaryName: string;
 
 if (platform === 'darwin') {
   binaryName = `omnijson-darwin-${arch}`;
@@ -25,8 +25,8 @@ const binaryPath = path.join(process.cwd(), binaryName);
 
 
 const config = parseUserInput();
-try { 
-    
+try {
+
     const exec = spawnSync(binaryPath, [config.dirPath, config.jsonPath, config.mode], { stdio: 'inherit' });
     if (exec.status !== 0) {
         console.error(exec.stderr);

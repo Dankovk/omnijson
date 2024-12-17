@@ -1,12 +1,12 @@
 #!/usr/bin/env bun
 
-import { promises as fs } from 'fs';
-import path from 'path';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
 import { file as BunFile, write as BunWrite } from 'bun';
 import { parseUserInput } from './system-wrapper.ts';
 import { Config, FileData } from './types.ts';
-import { Worker } from 'worker_threads';
-import os from 'os';
+import { Worker } from 'node:worker_threads';
+import os from 'node:os';
 
 const config: Config = parseUserInput();
 
@@ -15,10 +15,10 @@ const {
 } = config;
 
 function determineOptimalWorkerCount(): number {
-    
+
     const systemThreads = os.availableParallelism();
 
-    
+
     const workerCount = systemThreads;
 
     console.log(`System has ${workerCount} CPU cores. Using ${workerCount} workers.`);

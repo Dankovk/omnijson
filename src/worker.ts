@@ -1,7 +1,7 @@
-import { parentPort } from 'worker_threads';
+import { parentPort } from 'node:worker_threads';
 import { file as BunFile } from 'bun';
 import * as swc from '@swc/core';
-import path from 'path';
+import path from 'node:path';
 import { isBinaryFileSync } from 'isbinaryfile';
 
 const BINARY_CHECK_LENGTH = 512;
@@ -41,9 +41,9 @@ function createASTVisitor(): swc.Visitor {
             return path.visitChildren();
         },
         visitVariableDeclaration(path) {
-            if (path.node.declarations.some((decl) => 
-                decl.init?.type === 'CallExpression' && 
-                decl.init.callee.type === 'Identifier' && 
+            if (path.node.declarations.some((decl) =>
+                decl.init?.type === 'CallExpression' &&
+                decl.init.callee.type === 'Identifier' &&
                 ['require', 'import'].includes(decl.init.callee.value)
             )) {
                 path.remove();
@@ -72,11 +72,11 @@ function extractEssentials(source: string): string {
 }
 
 async function processFile(filePath: string, parentPath: string, mode: string, includeBinary: boolean) {
-    
+
     const fileFullPath = parentPath ? path.join(parentPath, path.basename(filePath)) : path.basename(filePath);
     const isBinary = await isBinaryFile(filePath);
     const fileContent = await Bun.file(filePath).text();
-    
+
 
     let content = '';
     if (isBinary) {
@@ -86,15 +86,15 @@ async function processFile(filePath: string, parentPath: string, mode: string, i
             return null;
         }
     } else {
-        
+
         if (mode === 'for_chatgpt') {
             content = extractEssentials(content);
         } else {
             content = fileContent;
         }
-         
+
     }
-    
+
     return { fileFullPath,  fileData: { code: fileContent, isBinary } };
 }
 

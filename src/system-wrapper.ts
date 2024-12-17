@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-import { Config } from './types';
+import type { Config } from './types.js';
 
 
 const defaultConfig: Config = {
