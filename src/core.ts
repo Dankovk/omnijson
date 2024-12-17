@@ -14,7 +14,7 @@ const {
     ignoreDirs, ignoreFiles, ignoreExt, jsonPath, dirPath, mode, clearDirAfterTransform, includeBinary
 } = config;
 
-function determineOptimalWorkerCount(): number {
+export function determineOptimalWorkerCount(): number {
 
     const systemThreads = os.availableParallelism();
 
@@ -26,11 +26,11 @@ function determineOptimalWorkerCount(): number {
 }
 const MAX_WORKERS = determineOptimalWorkerCount();
 
-function createWorker(): Worker {
+export function createWorker(): Worker {
     return new Worker(path.join(__dirname, 'worker.ts'));
 }
 
-async function processFileWithWorker(filePath: string, parentPath: string): Promise<[string, FileData] | null> {
+export async function processFileWithWorker(filePath: string, parentPath: string): Promise<[string, FileData] | null> {
     return new Promise((resolve, reject) => {
         const worker = createWorker();
         worker.on('message', (result) => {
@@ -51,7 +51,7 @@ async function processFileWithWorker(filePath: string, parentPath: string): Prom
     });
 }
 
-async function walkDir(dirPath: string, json: Record<string, FileData>, parentPath = ''): Promise<void> {
+export async function walkDir(dirPath: string, json: Record<string, FileData>, parentPath = ''): Promise<void> {
     if (ignoreDirs.some((dir: string) => [dirPath, parentPath, path.basename(dirPath), path.basename(parentPath)].includes(dir))) {
         return;
     }
@@ -103,7 +103,7 @@ async function walkDir(dirPath: string, json: Record<string, FileData>, parentPa
     });
 }
 
-async function toJson(dirPath: string, jsonPath: string): Promise<void> {
+export async function toJson(dirPath: string, jsonPath: string): Promise<void> {
     const json: Record<string, FileData> = {};
     await walkDir(dirPath, json);
     const parentDirName = process.cwd().replace(/^\//, '');
@@ -114,7 +114,7 @@ async function toJson(dirPath: string, jsonPath: string): Promise<void> {
     console.log('Converted directory to JSON.');
 }
 
-async function fromJson(dirPath: string, jsonPath: string): Promise<void> {
+export async function fromJson(dirPath: string, jsonPath: string): Promise<void> {
     const json = JSON.parse(await BunFile(jsonPath).text()).files as Record<string, FileData>;
 
     const writePromises = Object.entries(json).map(async ([fileFullPath, fileData]) => {
@@ -140,7 +140,7 @@ async function fromJson(dirPath: string, jsonPath: string): Promise<void> {
     console.log('Converted JSON to directory.');
 }
 
-async function doTransform(dirPath: string, jsonPath: string, operation: string): Promise<void> {
+export async function doTransform(dirPath: string, jsonPath: string, operation: string): Promise<void> {
     const _operation = mode || operation;
     switch (_operation) {
         case 'to_json':

@@ -27,6 +27,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@dankovk/omnijson": "npm:@jsr/dankovk__omnijson@^0.3.0",
     "@swc/core": "^1.6.4",
     "@swc/wasm": "^1.6.4",
     "bun": "^1.0.13",

@@ -25,6 +25,7 @@ const binaryPath = path.join(process.cwd(), binaryName);
 
 
 const config = parseUserInput();
+
 try {
 
     const exec = spawnSync(binaryPath, [config.dirPath, config.jsonPath, config.mode], { stdio: 'inherit' });
