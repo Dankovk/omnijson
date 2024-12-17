@@ -7,5 +7,9 @@
     "ohmyjson": "./src/index.ts"
   },
   "type": "module",
-  
+  "dependencies": {
+    "@swc/core": "^1.6.4",
+    "@swc/wasm": "^1.6.4",
+    "isbinaryfile": "^5.0.2"
+  }
 }

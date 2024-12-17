@@ -1,6 +1,6 @@
 {
-  "name": "ohmyjson",
-  "version": "0.0.11-js",
+  "name": "@dankovk/omnijson",
+  "version": "0.2.0",
   "description": "A simple CLI tool to (un)jsonify files and directories",
   "scripts": {
     "build:executable:darwin-arm64": "bun build src/core.ts --compile --target=bun-darwin-arm64 --outfile dist/omnijson-darwin-arm64",
